@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'inter';
+  src: url('/fonts/inter.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'firacode';
+  src: url('/fonts/firacode.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --color-background: hsl(0, 0%, 100%);
+  --color-navbar: hsl(0, 0%, 100%);
+  --color-footer: hsl(0, 0%, 100%);
+  --color-text-primary: hsl(0, 0%, 0%);
+  --color-text-secondary: hsl(0, 0%, 18%);
+  --color-text-accent: hsl(210, 73%, 27%);
+}
+
+.dark {
+  --color-background: hsl(193, 14%, 20%);
+  --color-navbar: hsl(184, 11%, 28%);
+  --color-footer: hsl(184, 11%, 28%);
+  --color-text-primary: hsl(0, 0%, 100%);
+  --color-text-secondary: hsl(0, 0%, 76%);
+  --color-text-accent: hsl(184, 94%, 33%);
+}
