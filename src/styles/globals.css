@@ -18,18 +18,18 @@
 
 :root {
   --color-background: hsl(0, 0%, 100%);
-  --color-navbar: hsl(0, 0%, 100%);
+  --color-navbar: hsl(0, 0%, 96%);
   --color-footer: hsl(0, 0%, 100%);
-  --color-text-primary: hsl(0, 0%, 0%);
-  --color-text-secondary: hsl(0, 0%, 18%);
-  --color-text-accent: hsl(210, 73%, 27%);
+  --color-text-primary: hsl(0, 0%, 30%);
+  --color-text-secondary: hsl(0, 0%, 37%);
+  --color-text-accent: hsl(175, 57%, 42%);
 }
 
 .dark {
-  --color-background: hsl(193, 14%, 20%);
-  --color-navbar: hsl(184, 11%, 28%);
-  --color-footer: hsl(184, 11%, 28%);
+  --color-background: hsl(210, 33%, 6%);
+  --color-navbar: hsl(210, 33%, 8%);
+  --color-footer: hsl(210, 33%, 6%);
   --color-text-primary: hsl(0, 0%, 100%);
-  --color-text-secondary: hsl(0, 0%, 76%);
-  --color-text-accent: hsl(184, 94%, 33%);
+  --color-text-secondary: hsl(200, 35%, 80%);
+  --color-text-accent: hsl(175, 72%, 54%);
 }

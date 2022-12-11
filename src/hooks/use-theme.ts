@@ -1,5 +1,5 @@
+import { useLocalStorage } from "@hooks/use-local-storage";
 import React from "react";
-import useLocalStorage from "./use-local-storage";
 
 const THEME_KEY = "theme";
 
@@ -13,7 +13,7 @@ interface UseThemeOutput {
 	toggleTheme: () => void
 };
 
-const useTheme = () : UseThemeOutput => {
+export const useTheme = () : UseThemeOutput => {
 
 	const { value: theme, setValue: setTheme } = useLocalStorage(THEME_KEY, Theme.light);
 
@@ -31,5 +31,3 @@ const useTheme = () : UseThemeOutput => {
 
 const getOppositeTheme = (theme: string): Theme => 
 	theme === Theme.light ? Theme.dark : Theme.light;
-
-export default useTheme;

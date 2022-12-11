@@ -1,12 +1,10 @@
 interface Props {
   children: React.ReactNode
 }
-const Content = ({ children }: Props) => (
+export const Content = ({ children }: Props) => (
 	<main className="grow bg-background">
-		<div className="lg:container lg:mx-auto h-full">
+		<div className="lg:max-w-screen-md 2xl:max-w-screen-xl mx-auto h-full px-4 my-6">
 			{children}
 		</div>
 	</main>
 )
-
-export default Content;

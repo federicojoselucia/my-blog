@@ -5,7 +5,7 @@ interface UseLocalStorageOutput {
 	setValue: (value: string) => void
 }
 
-const useLocalStorage = (key: string, initialValue: string): UseLocalStorageOutput => {
+export const useLocalStorage = (key: string, initialValue: string): UseLocalStorageOutput => {
 
 	const [value, setValue] = React.useState(initialValue);
 
@@ -43,5 +43,3 @@ const setToLocalStorage = (key: string, value: string) => {
 		console.warn(`Error writing to local storage; key “${key}”:`)
 	}
 };
-
-export default useLocalStorage;

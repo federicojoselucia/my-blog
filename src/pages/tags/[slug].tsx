@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next/types";
-import { getAllTags, getPostsMetadataFromTag, PostMetadata } from "src/lib/mdx";
-import Articles from "src/components/articles";
+import { getAllTags, getPostsMetadataFromTag, PostMetadata } from "@lib/mdx";
 
 interface Props {
     slug: string,
@@ -14,7 +13,6 @@ const TagPage: NextPage<Props> = ({ slug, postsMetadata }) => (
         <title>Tag: { slug }</title>
     </Head>
     <h1>Tag: { slug }</h1>
-    <Articles postsMetadata={postsMetadata}/>
     </>
 )
 

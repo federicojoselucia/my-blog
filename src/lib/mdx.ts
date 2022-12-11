@@ -14,6 +14,7 @@ export interface Post {
 };
 
 export interface PostMetadata {
+	id: number;
 	slug: string;
 	title: string;
 	subtitle: string;
@@ -73,6 +74,7 @@ const getPostFromPath = (postPath: string): Post => {
 	return {
 		content,
 		metadata: {
+			id: data.id,
 			slug: slug,
 			title: data.title ?? slug,
 			subtitle: data.subtitle ?? "",

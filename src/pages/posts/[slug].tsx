@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next/types";
-import { getAllPostsSlugs, getMDXPostFromSlug, MDXPost } from "src/lib/mdx";
+import { getAllPostsSlugs, getMDXPostFromSlug, MDXPost } from "@lib/mdx";
 
 interface Props {
     post: MDXPost;

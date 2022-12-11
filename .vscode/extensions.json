@@ -1,9 +1,9 @@
 {
     "recommendations": [
-        "silvenon.mdx",
         "bradlc.vscode-tailwindcss",
         "pkief.material-icon-theme",
         "npxms.hide-gitignored",
-        "ecmel.vscode-html-css"
+        "ecmel.vscode-html-css",
+        "unifiedjs.vscode-mdx"
     ]
 }

@@ -1,8 +1,8 @@
-import { GitHubIcon, LinkedinIcon, MailIcon } from "../icons/social";
+import { GitHubIcon, LinkedinIcon, MailIcon } from "@components/icons/social";
 
-const Footer = () => (
+export const Footer = () => (
 	<footer className="bg-footer w-full h-14">
-		<div className="lg:container lg:mx-auto flex justify-between items-center h-full">
+		<div className="lg:max-w-screen-md 2xl:max-w-screen-xl mx-auto flex justify-between items-center h-full px-4">
 			<CopyrightNotice/>
 			<ContactIcons/>
 		</div>
@@ -30,5 +30,3 @@ const ContactIcons = () => {
 		</div>
 	);
 };
-
-export default Footer;
