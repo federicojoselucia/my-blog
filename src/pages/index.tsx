@@ -1,6 +1,7 @@
 import { GetStaticProps, NextPage } from "next/types";
-import { PostList } from "@components/post-list/post-list";
-import { getAllPostsMetadata, PostMetadata } from '@lib/mdx'
+import { PostList } from "@components";
+import { getAllPostsMetadata } from "@lib/mdx";
+import { PostMetadata } from "@models";
 
 interface Props {
   postsMetadata: Array<PostMetadata>;
@@ -14,7 +15,6 @@ const HomePage: NextPage<Props> = ({ postsMetadata }) => (
 );
 
 export const getStaticProps : GetStaticProps = async () => {
-  console.log('asd')
   const postsMetadata = getAllPostsMetadata().slice(0, 9);
   return {
     props: { postsMetadata }

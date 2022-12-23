@@ -1,6 +1,7 @@
 import { GetStaticProps, NextPage } from "next/types";
-import { getAllPostsMetadata, PostMetadata } from '@lib/mdx'
+import { getAllPostsMetadata } from '@lib/mdx'
 import { PostList } from "@components";
+import { PostMetadata } from "@models";
 
 interface Props {
   postsMetadata: Array<PostMetadata>;

@@ -1,24 +1,25 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next/types";
-import { getAllPostsSlugs, getMDXPostFromSlug, MDXPost } from "@lib/mdx";
+import { getAllPostsSlugs, getPostFromSlug } from "@lib/mdx";
+import { Post } from "@models";
 
 interface Props {
-    post: MDXPost;
+    post: Post;
 }
 
 const PostPage: NextPage<Props> = ({ post }) => (
     <>
         <Head>
-            <title>{ post.metadata.title }</title>
+            <title>{ post.title }</title>
         </Head>
-        <h1 className="text-3xl font-bold underline">{ post.metadata.title }</h1>
+        <h1 className="text-3xl font-bold underline">{ post.title }</h1>
     </>
 )
 
 
 export const getStaticProps : GetStaticProps = async ({params}) => {
     const { slug } = params as { slug: string };
-    const post = await getMDXPostFromSlug(slug);
+    const post = await getPostFromSlug(slug);
 
     return {
         props: { post }
