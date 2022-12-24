@@ -1,6 +1,6 @@
 import { PostListItem } from "@components/post-list/post-list-item";
-import { PostMetadata } from "@lib/mdx/mdx";
 import { Divider } from "@components/divider";
+import { PostMetadata } from "@models";
 
 interface Props {
   postsMetadata: Array<PostMetadata>

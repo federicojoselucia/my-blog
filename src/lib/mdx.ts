@@ -1,11 +1,19 @@
+import path from "path";
+import fs from "fs";
+import yaml from 'js-yaml'
+
 import { sync } from "glob";
 import { serialize } from "next-mdx-remote/serialize";
-import matter from "gray-matter";
-import path from "path";
 import { Post, PostContent, PostMetadata } from "@models";
+
+import rehypeHighlight from "rehype-highlight";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import "highlight.js/styles/atom-one-dark.css";
 
 const POSTS_DIRECTORY = path.join(process.cwd(), "posts");
 const MDX_EXT = ".mdx";
+const FRONTMATTER_FENCE = "---"
 
 interface RawPost {
 	rawContent: string;
@@ -48,7 +56,17 @@ export const getPostFromSlug = async (slug: string): Promise<Post> => {
  */
 const getPostFromRawPost = async (raw: RawPost): Promise<Post> => {
 	const metadata = getMetadataFromRawPost(raw);
-	const content: PostContent = await serialize(raw.rawContent);
+	const content: PostContent = await serialize(raw.rawContent, {
+		mdxOptions: {
+			rehypePlugins: [
+				rehypeSlug,
+				[rehypeAutolinkHeadings, { behavior: "wrap" }],
+				rehypeHighlight
+			]
+		},
+		parseFrontmatter: true
+	});
+
 	return {
 		content,
 		...metadata
@@ -60,14 +78,14 @@ const getPostFromRawPost = async (raw: RawPost): Promise<Post> => {
  */
 const getMetadataFromRawPost = (raw: RawPost): PostMetadata => {
 	if (!raw.rawMetadata.id)
-		throw new Error(`Invalid post id. Path: ${raw.path})`);
+		throw new Error(`Invalid post id. Path: ${raw.path}`);
 	if (!raw.rawMetadata.title)
-		throw new Error(`Invalid post title. Path: ${raw.path})`);
+		throw new Error(`Invalid post title. Path: ${raw.path}`);
 	if (!raw.rawMetadata.date)
-		throw new Error(`Invalid post date. Path: ${raw.path})`);
+		throw new Error(`Invalid post date. Path: ${raw.path}`);
 
 	const postDate = new Date(raw.rawMetadata.date);
-	
+
 	return {
 		id: raw.rawMetadata.id,
 		slug: extractFileNameFromPath(raw.path),
@@ -76,7 +94,7 @@ const getMetadataFromRawPost = (raw: RawPost): PostMetadata => {
 		tags: raw.rawMetadata.tags ?? [],
 		date: {
 			year: postDate.getFullYear(),
-			month: postDate.getMonth()+1,
+			month: postDate.getMonth() + 1,
 			day: postDate.getDate(),
 			timestamp: postDate.getTime()
 		}
@@ -102,13 +120,30 @@ const getRawPostFromSlug = (slug: string): RawPost => {
  * Returns the raw post read from a filesystem path
  */
 const getRawPostFromPath = (path: string): RawPost => {
-	const { content: rawContent, data: rawMetadata }: { content: string, data: RawPostMetadata } = matter.read(path);
+	const rawContent = readRawContentFromPath(path);
+	const rawMetadata = parseRawMetadataFromRawContent(rawContent);
 	return {
 		rawContent,
 		rawMetadata,
 		path
 	};
 };
+
+/**
+ * Returns the raw content read from a filesystem path
+ */
+const readRawContentFromPath = (path: string): string => 
+	fs.readFileSync(path, "utf8");
+
+/**
+ * Returns the raw metadata parsed from the raw content
+ */
+const parseRawMetadataFromRawContent = (rawContent: string): RawPostMetadata => {
+	const fenceLengthToSkip = FRONTMATTER_FENCE.length;
+	const fenceEndIndex = rawContent.indexOf(FRONTMATTER_FENCE, fenceLengthToSkip);
+	const frontmatter = rawContent.substring(fenceLengthToSkip, fenceEndIndex);
+	return yaml.load(frontmatter) as RawPostMetadata;
+}
 
 /**
  * Returns the built post path using the posts directory and the file name

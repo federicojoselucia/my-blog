@@ -1,0 +1,1 @@
+export { PostBody } from "@components/post-body/post-body"
